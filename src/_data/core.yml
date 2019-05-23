@@ -1,0 +1,19 @@
+navigation:
+  top:
+    - url: "/#about/"
+      caption: About
+    - url: "#projects"
+      caption: Projects
+projects:
+  - name: AvroEx
+    repo: avro_ex
+    intro: An Avro Library that emphasizes testability and ease of use.
+  - name: Elixir Companies
+    repo: elixir-companies
+    intro: A list of companies currently using Elixir in production.
+  - name: Sheriff
+    repo: sheriff
+    intro: Build simple and robust authorization systems with Elixir and Plug
+  - name: UA Parser
+    repo: ua_parser
+    intro: UserAgentParser implementation for Elixir

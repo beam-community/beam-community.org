@@ -1,0 +1,45 @@
+---
+layout: default
+---
+<a id="home"></a>
+<section class="hero is-medium hero-home is-black">
+  <div class="hero-head">
+    {%- include _nav.html -%}
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-gapless">
+        <div class="column is-5-desktop">
+          <h1 class="title is-2 is-uppercase">Discover. Learn. Code.</h1>
+          <p class="content is-size-5 has-text-weight-light">{{ site.description }}</p>
+        </div>  
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section fact">
+  <div class="container">
+    <div class="content column is-6 is-offset-3 has-text-centered is-centered">
+      <!-- <h2 class="title">A header here would look good</h2> -->
+      <p class="has-text-weight-light is-size-5 is-italic">BEAM is part of the Erlang Run-Time System (ERTS), which compiles Erlang and Elixir source code into bytecode, which is then executed on the BEAM.</p>
+    </div>
+  </div>
+</section>
+
+<a id="projects"></a>
+<section class="section projects">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered-touch">Featured Projects</h2>
+    <div class="columns is-multiline">
+      {% for project in site.data.core.projects %}
+      <div class="column is-3">
+        <div class="box content">
+          <h4 class="title is-5"><a href="https://github.com/{{ site.github }}/{{ project.repo }}" target="_blank">{{ project.name }}</a></h4>
+          <p>{{ project.intro }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
