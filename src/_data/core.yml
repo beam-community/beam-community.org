@@ -17,3 +17,13 @@ projects:
   - name: UA Parser
     repo: ua_parser
     intro: UserAgentParser implementation for Elixir
+support:
+  - name: Elixir School
+    repo: elixir-school
+    intro: Elixir School is the premier destination for people looking to learn and master the Elixir programming language.
+  - name: ueberauth
+    repo: ueberauth
+    intro: An Elixir Authentication System for Plug-based Web Applications
+  - name: Slime
+    repo: slime-lang
+    intro: Minimalistic HTML templates for Elixir, inspired by Slim.

@@ -1,0 +1,48 @@
+header: A History of Erlang and The BEAM
+details: In this piece, we will explore the history that has lead us to the Erlang ecosystem and BEAM Virtual Machine we know and love today.
+items:
+  - year: 1985
+    style: # defaults
+      year: is-primary
+    milestones:
+      - caption: Research begins to determine an appropriate language for new telecom systems
+        details: "This was the beginning research phase trying to determine what might be a great building block for new types of telecom software. They wanted something that had high level abstractions to allow for large productivity gains, trying to break out of constraints introduced from their current systems. Leading contenders included Prolog and Lisp, among others."
+        style: # defaults
+          line: is-grey
+          marker: is-link
+  - year: 1986
+    milestones:
+      - caption: Initial Prolog Implementation Derived
+        details: "The intial proof of concept is built in Prolog. Features are quickly iterated upon, eventually building up to JAM: Joe's Abstract Machine."
+  - year: 1987
+    milestones: 
+      - caption: Work on a new programming language begins internal to Ericsson
+  - year: 1990
+    milestones: 
+      - caption: Erlang released at international telecomm conference ISS'90
+  - year: 1991
+    milestones:
+      - caption: Fast implementation of Erlang released. 
+      - caption: More functionality such as ASN1 - Compiler, GUI, and more.
+      - caption: Erlang is represented at Telecom'91
+  - year: 1992
+    milestones:
+      - caption: Erlang ported to VxWorks, PC, Macintosh, and other platforms
+  - year: 1993
+    milestones:
+      - caption: Distribution is added to Erlang. Ericsson dedicates resources to supporting Erlang externally.
+  - year: 1995
+    milestones:
+      - caption: Ericsson begins work on OTP internally 
+  - year: 1996
+    milestones:
+      - caption: The Open Telecom Platform (OTP) prototype delivered.
+  - year: 1999
+    milestones:
+      - caption: Erlang is open sourced
+  - year: 2011
+    milestones:
+      - caption: Elixir development begins
+  - year: 2014
+    milestones:
+      - caption: Elixir 1.0.0 is released
