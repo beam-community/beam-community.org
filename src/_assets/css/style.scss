@@ -10,7 +10,7 @@ $box-radius: 10px;
 
 @import 'bulma/bulma';
 @import 'libs/mixins';
-
+@import 'bulma-timeline/src/sass';
 html {
   body {
     @include font-smoothing(off);
@@ -26,42 +26,56 @@ html {
         /* background by SVGBackgrounds.com */        
       }
     }
-        
+    
     .section {
-      padding: 4rem 1.5rem;
-      
+      padding: 4rem 1.5rem 0 1.5rem;
+
       &.fact {
         border-top: 1px solid $primary;
+        border-bottom: 1px solid $grey-lighter;
+        padding-bottom: 4rem;
       }
       
-      &.projects {
+      &.support {
+        padding-bottom: 4rem;
+      }
+      
+      &.boxes {
         background-color: $white-ter;
-        border-top: 1px solid $grey-lighter;
 
         h2.title {
           margin-bottom: 4rem;
         }
         .box {
           min-height: 200px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
+          
           p {
             min-height: 65px;
           }
+          
           &:hover {
             box-shadow: 0 0 15px hsl(0, 0%, 81%), 0 0 0 1px hsl(0, 0%, 81%);
+          }
+        }
+        .not-box {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          align-content: center;
+          justify-content: center;
+          @include until($tablet) {
+            margin-top: 4rem;
           }
         }
       }      
     }
     
-    .footer {
-
-      border-top: 1px solid $grey-lighter;
-      background-color: $white-ter;
+    .timeline-content {
+      .heading {
+        font-size: 0.9rem;
+      }
     }
+    
     #navbar {
       .navbar-brand {
         .navbar-item {
@@ -69,5 +83,6 @@ html {
         }
       }
     }
+  
   }
 }

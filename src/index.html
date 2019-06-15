@@ -28,18 +28,67 @@ layout: default
 </section>
 
 <a id="projects"></a>
-<section class="section projects">
+<section class="section boxes">
   <div class="container">
-    <h2 class="title is-3 has-text-centered-touch">Featured Projects</h2>
-    <div class="columns is-multiline">
+    <h2 class="title is-5 has-text-centered-touch has-text-weight-normal">Featured Projects</h2>
+    <div class="columns is-multiline is-touch">
       {% for project in site.data.core.projects %}
       <div class="column is-3">
-        <div class="box content">
+        <div class="box content is-centered">
           <h4 class="title is-5"><a href="https://github.com/{{ site.github }}/{{ project.repo }}" target="_blank">{{ project.name }}</a></h4>
           <p>{{ project.intro }}</p>
         </div>
       </div>
       {% endfor %}
     </div>
+  </div>
+</section>
+
+<a id="support"></a>
+<section class="section boxes support">
+  <div class="container">
+    <h2 class="title is-5 has-text-centered-touch has-text-black has-text-weight-normal">We Support</h2>
+    <div class="columns is-multiline">
+      {% for project in site.data.core.support %}
+      <div class="column is-3">
+        <div class="box content is-centered">
+          <h4 class="title is-5"><a href="https://github.com/{{ project.repo }}" target="_blank">{{ project.name }}</a></h4>
+          <p>{{ project.intro }}</p>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="column is-3 has-text-centered not-box">
+        <div>
+          <span class="icon is-medium">
+            <span class="fa-stack">
+              <i class="fas has-text-grey fa-circle fa-stack-2x"></i>
+              <i class="fas fa-plug fa-stack-1x fa-inverse"></i>
+            </span>
+          </span>
+        </div>
+        <h3 class="title is-4">Need a plug?</h3>
+        <p class="content has-text-weight-light">Contact us to join the family.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a id="timeline"></a>
+<section class="section">
+  <div class="container">
+    <h2 class="title is-5 has-text-centered-touch has-text-black has-text-weight-normal">{{ site.data.timeline.header }}</h2>
+    <p class="content has-text-grey has-text-centered-touch">{{ site.data.timeline.details }}</p>
+    <div class="timeline">
+    {% for item in site.data.timeline.items %}
+      {% capture tl-year %}{% if item.style.year %}{{ item.style.year }}{% else %}is-primary{% endif %}{% endcapture %}
+      <header class="timeline-header">
+        <span class="tag is-medium {{ tl-year }}">{{ item.year }}</span>
+      </header>
+      {% for milestone in item.milestones %}
+        {% include partials/timeline-item.html milestone=milestone %}
+      {% endfor %}
+    {% endfor %}
+    </div>
+    
   </div>
 </section>
