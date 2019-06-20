@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/beam-community/home.svg?branch=master)](https://travis-ci.org/beam-community/home)
+[![Build Status](https://travis-ci.org/beam-community/beam-community.org.svg?branch=master)](https://travis-ci.org/beam-community/beam-community.org)
 
 # Beam Community
 
