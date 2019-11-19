@@ -19,7 +19,7 @@ projects:
     intro: UserAgentParser implementation for Elixir
 support:
   - name: Elixir School
-    repo: elixir-school
+    repo: elixirschool
     intro: Elixir School is the premier destination for people looking to learn and master the Elixir programming language.
   - name: ueberauth
     repo: ueberauth
