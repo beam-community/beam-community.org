@@ -5,18 +5,18 @@ navigation:
     - url: "#projects"
       caption: Projects
 projects:
-  - name: AvroEx
-    repo: avro_ex
-    intro: An Avro Library that emphasizes testability and ease of use.
+  - name: Bamboo
+    repo: bamboo
+    intro: Testable, composable, and adapter based Elixir email library for devs that love piping.
   - name: Elixir Companies
     repo: elixir-companies
     intro: A list of companies currently using Elixir in production.
-  - name: Sheriff
-    repo: sheriff
-    intro: Build simple and robust authorization systems with Elixir and Plug
-  - name: UA Parser
-    repo: ua_parser
-    intro: UserAgentParser implementation for Elixir
+  - name: ExMachina
+    repo: ex_machina
+    intro: ExMachina makes it easy to create test data and associations.
+  - name: JSONAPI
+    repo: jsonapi
+    intro: JSON:API Serializer and Query Handler for Elixir.
 support:
   - name: Elixir School
     repo: elixirschool
