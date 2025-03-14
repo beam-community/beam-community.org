@@ -1,37 +1,32 @@
-[![Build Status](https://travis-ci.org/beam-community/beam-community.org.svg?branch=master)](https://travis-ci.org/beam-community/beam-community.org)
+# BEAM Community Website
 
-# Beam Community
+[![Build](https://github.com/beam-community/beam-community.org/actions/workflows/build.yml/badge.svg)](https://github.com/beam-community/beam-community.org/actions/workflows/build.yml)
 
-Dedicated to supporting, and growing, community packages and documentation for Elixir and Erlang.
+This is the official website for the BEAM Community, a collection of open source projects for the Erlang ecosystem.
 
-## Setup
+## Technology Stack
 
-This repo uses [asdf.vm](https://asdf-vm.com/) to manage versions. Please follow set up their instructions.
-
-Then run the following to install the correct language versions:
-
-```bash
-asdf install
-```
-
-### Project dependencies
-
-Install specific ruby dependencies with:
-
-```bash
-bundle install
-```
-
-Install the specific javascript dependencies with:
-
-```bash
-yarn install
-```
+- Next.js - React framework
+- TypeScript - Type-safe JavaScript
+- Bulma - CSS framework
 
 ## Development
 
-Run the local [Jekyll](https://jekyllrb.com/) server and view in the provided server address.
+To run the development server:
 
 ```bash
-bundle exec jekyll serve
+mise install
+pnpm install
+pnpm run dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
