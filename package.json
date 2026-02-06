@@ -1,6 +1,6 @@
 {
 	"name": "beam-community-website",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -29,7 +29,10 @@
 	},
 	"packageManager": "pnpm@10.6.3",
 	"pnpm": {
-		"onlyBuiltDependencies": ["esbuild", "sharp"],
+		"onlyBuiltDependencies": [
+			"esbuild",
+			"sharp"
+		],
 		"overrides": {
 			"@eslint/plugin-kit": "^0.2.8"
 		}
