@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/beam-community/beam-community.org/compare/v1.0.0...v1.0.1) (2026-02-06)
+
+
+### Bug Fixes
+
+* add .nojekyll to prevent GitHub Pages from ignoring _astro dir ([#41](https://github.com/beam-community/beam-community.org/issues/41)) ([33ac271](https://github.com/beam-community/beam-community.org/commit/33ac271ba1ef64ef4e5f4c328fc7cac9e6ee65e3))
+
 ## 1.0.0 (2026-02-06)
 
 
