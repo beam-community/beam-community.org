@@ -14,8 +14,8 @@ const EXCLUDED_REPOS = new Set([
 
 const FEATURED_COUNT = 6;
 
-function githubHeaders(): HeadersInit {
-  const h: HeadersInit = {
+function githubHeaders(): Record<string, string> {
+  const h: Record<string, string> = {
     Accept: "application/vnd.github.v3+json",
   };
   const token = import.meta.env.GITHUB_TOKEN;

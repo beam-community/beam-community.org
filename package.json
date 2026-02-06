@@ -29,6 +29,9 @@
 	},
 	"packageManager": "pnpm@10.6.3",
 	"pnpm": {
-		"onlyBuiltDependencies": ["esbuild", "sharp"]
+		"onlyBuiltDependencies": ["esbuild", "sharp"],
+		"overrides": {
+			"@eslint/plugin-kit": "^0.2.8"
+		}
 	}
 }
