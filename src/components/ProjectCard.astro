@@ -1,0 +1,51 @@
+---
+import type { Project } from "../lib/types";
+import { Icon } from "astro-icon/components";
+import Badge from "./Badge.astro";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<a
+  href={project.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    "group block rounded-xl border bg-white p-6 transition-all hover:shadow-lg hover:-translate-y-0.5",
+    project.isFeatured ? "border-purple-200 ring-1 ring-purple-100" : "border-slate-200",
+  ]}
+>
+  <div class="flex items-start justify-between gap-2">
+    <h3 class="font-semibold text-slate-900 group-hover:text-purple-700 transition-colors font-mono text-base">
+      {project.name}
+    </h3>
+    {project.isFeatured && (
+      <span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-accent-100 text-accent-700">
+        <Icon name="lucide:star" class="w-3 h-3" />
+        Featured
+      </span>
+    )}
+  </div>
+
+  <p class="mt-2 text-sm text-slate-600 line-clamp-2">{project.description}</p>
+
+  <div class="mt-4 flex flex-wrap items-center gap-2">
+    {project.language && <Badge text={project.language} variant="language" />}
+    {project.topics.slice(0, 3).map((topic) => <Badge text={topic} />)}
+  </div>
+
+  <div class="mt-4 flex items-center gap-4 text-sm text-slate-500">
+    <span class="inline-flex items-center gap-1">
+      <Icon name="lucide:star" class="w-4 h-4" />
+      {project.stars.toLocaleString()}
+    </span>
+    <span class="inline-flex items-center gap-1">
+      <Icon name="lucide:git-fork" class="w-4 h-4" />
+      {project.forks.toLocaleString()}
+    </span>
+  </div>
+</a>

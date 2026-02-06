@@ -1,0 +1,38 @@
+---
+import { Icon } from "astro-icon/components";
+import { FOOTER_LINKS } from "../lib/constants";
+---
+
+<footer class="bg-slate-900 text-slate-400 py-12">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+      <!-- Brand -->
+      <div class="flex items-center gap-2 text-white font-semibold">
+        <Icon name="lucide:hexagon" class="w-5 h-5" />
+        BEAM Community
+      </div>
+
+      <!-- Links -->
+      <div class="flex items-center gap-6">
+        {
+          FOOTER_LINKS.map((link) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-white transition-colors"
+              aria-label={link.label}
+              title={link.label}
+            >
+              <Icon name={link.icon} class="w-5 h-5" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="mt-8 pt-8 border-t border-slate-800 text-center text-sm">
+      <p>&copy; {new Date().getFullYear()} BEAM Community. Open source under the MIT License.</p>
+    </div>
+  </div>
+</footer>

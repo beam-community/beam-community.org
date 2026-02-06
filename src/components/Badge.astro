@@ -1,0 +1,17 @@
+---
+interface Props {
+  text: string;
+  variant?: "language" | "topic";
+}
+
+const { text, variant = "topic" } = Astro.props;
+
+const classes =
+  variant === "language"
+    ? "bg-purple-100 text-purple-800"
+    : "bg-slate-100 text-slate-600";
+---
+
+<span class:list={["inline-block px-2.5 py-0.5 rounded-full text-xs font-medium", classes]}>
+  {text}
+</span>

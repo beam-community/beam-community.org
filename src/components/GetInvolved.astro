@@ -1,0 +1,37 @@
+---
+import { Icon } from "astro-icon/components";
+import { INVOLVEMENT_CARDS } from "../lib/constants";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="get-involved" class="py-20 sm:py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading
+      title="Get Involved"
+      subtitle="The BEAM community thrives because of contributors like you."
+    />
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        INVOLVEMENT_CARDS.map((card) => (
+          <div class="text-center p-8 rounded-xl border border-slate-200 hover:shadow-lg transition-shadow">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-purple-100 mb-5">
+              <Icon name={card.icon} class="w-7 h-7 text-purple-600" />
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">{card.title}</h3>
+            <p class="text-sm text-slate-600 mb-5">{card.description}</p>
+            <a
+              href={card.linkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-sm font-medium text-purple-700 hover:text-purple-900 transition-colors"
+            >
+              {card.linkText}
+              <Icon name="lucide:arrow-right" class="w-4 h-4" />
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

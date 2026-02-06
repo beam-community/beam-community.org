@@ -1,0 +1,60 @@
+---
+import type { OrgStats } from "../lib/types";
+import StatItem from "./StatItem.astro";
+
+interface Props {
+  stats: OrgStats;
+}
+
+const { stats } = Astro.props;
+---
+
+<section class="relative min-h-[600px] flex flex-col justify-center overflow-hidden bg-gradient-to-br from-purple-900 via-purple-800 to-purple-700">
+  <!-- Geometric pattern overlay -->
+  <div class="absolute inset-0 opacity-10">
+    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="hex" width="56" height="100" patternUnits="userSpaceOnUse" patternTransform="scale(2)">
+          <path d="M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100" fill="none" stroke="white" stroke-width="0.5" />
+          <path d="M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34" fill="none" stroke="white" stroke-width="0.5" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hex)" />
+    </svg>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+    <div class="text-center max-w-3xl mx-auto">
+      <h1 class="text-4xl font-bold text-white sm:text-5xl lg:text-6xl tracking-tight">
+        The home for community-driven
+        <span class="text-accent-400">Elixir & Erlang</span>
+        packages
+      </h1>
+      <p class="mt-6 text-lg text-purple-200 sm:text-xl max-w-2xl mx-auto">
+        We maintain, support, and grow the open source libraries the BEAM ecosystem depends on.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="#projects"
+          class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 rounded-lg bg-accent-500 text-white font-semibold hover:bg-accent-600 transition-colors"
+        >
+          Explore Projects
+        </a>
+        <a
+          href="#get-involved"
+          class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 rounded-lg border-2 border-white/30 text-white font-semibold hover:bg-white/10 transition-colors"
+        >
+          Get Involved
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-8 border-t border-white/20 pt-8">
+      <StatItem value={stats.projectCount} label="Projects" />
+      <StatItem value={stats.totalStars} label="GitHub Stars" />
+      <StatItem value={stats.totalForks} label="Forks" />
+      <StatItem value={stats.memberCount} label="Maintainers" />
+    </div>
+  </div>
+</section>

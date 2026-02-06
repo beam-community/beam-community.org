@@ -1,0 +1,24 @@
+---
+import type { Project } from "../lib/types";
+import SectionHeading from "./SectionHeading.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section id="projects" class="py-20 sm:py-24 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading
+      title="Our Projects"
+      subtitle="Open source libraries and tools maintained by the BEAM community."
+    />
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </div>
+</section>
