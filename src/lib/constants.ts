@@ -65,7 +65,7 @@ export const INVOLVEMENT_CARDS = [
 
 export const FOOTER_LINKS = [
   { label: "GitHub", url: "https://github.com/beam-community", icon: "simple-icons:github" },
-  { label: "Hex.pm", url: "https://hex.pm", icon: "simple-icons:elixir" },
+  { label: "Hex.pm", url: "https://hex.pm/orgs/beam_community", icon: "simple-icons:elixir" },
   { label: "Elixir Forum", url: "https://elixirforum.com", icon: "lucide:message-circle" },
   { label: "Erlang Ecosystem Foundation", url: "https://erlef.org", icon: "lucide:globe" },
 ];
@@ -79,7 +79,7 @@ export const FALLBACK_PROJECTS: Project[] = [
     language: "Elixir",
     topics: ["elixir", "testing"],
     url: "https://github.com/beam-community/ex_machina",
-    homepage: "https://hex.pm/packages/ex_machina",
+    homepage: "https://hex.pm/orgs/beam_community/packages/ex_machina",
     isFeatured: true,
   },
   {
@@ -91,7 +91,7 @@ export const FALLBACK_PROJECTS: Project[] = [
     language: "Elixir",
     topics: ["elixir", "email"],
     url: "https://github.com/beam-community/bamboo",
-    homepage: "https://hex.pm/packages/bamboo",
+    homepage: "https://hex.pm/orgs/beam_community/packages/bamboo",
     isFeatured: true,
   },
   {
@@ -113,7 +113,7 @@ export const FALLBACK_PROJECTS: Project[] = [
     language: "Elixir",
     topics: ["elixir", "stripe"],
     url: "https://github.com/beam-community/stripity-stripe",
-    homepage: "https://hex.pm/packages/stripity_stripe",
+    homepage: "https://hex.pm/orgs/beam_community/packages/stripity_stripe",
     isFeatured: true,
   },
   {
@@ -124,7 +124,7 @@ export const FALLBACK_PROJECTS: Project[] = [
     language: "Elixir",
     topics: ["elixir", "json-api"],
     url: "https://github.com/beam-community/jsonapi",
-    homepage: "https://hex.pm/packages/jsonapi",
+    homepage: "https://hex.pm/orgs/beam_community/packages/jsonapi",
     isFeatured: true,
   },
   {
@@ -135,7 +135,7 @@ export const FALLBACK_PROJECTS: Project[] = [
     language: "Elixir",
     topics: ["elixir", "avro"],
     url: "https://github.com/beam-community/avro_ex",
-    homepage: "https://hex.pm/packages/avro_ex",
+    homepage: "https://hex.pm/orgs/beam_community/packages/avro_ex",
     isFeatured: true,
   },
   {
@@ -147,7 +147,7 @@ export const FALLBACK_PROJECTS: Project[] = [
     language: "Elixir",
     topics: ["elixir", "authentication"],
     url: "https://github.com/beam-community/ueberauth",
-    homepage: "https://hex.pm/packages/ueberauth",
+    homepage: "https://hex.pm/orgs/beam_community/packages/ueberauth",
     isFeatured: false,
   },
   {
