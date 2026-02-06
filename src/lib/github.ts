@@ -2,6 +2,7 @@ import type { Project, OrgStats } from "./types";
 import { FALLBACK_PROJECTS, FALLBACK_STATS } from "./constants";
 
 const GITHUB_API = "https://api.github.com";
+const HEX_API = "https://hex.pm/api";
 const ORG = "beam-community";
 
 const EXCLUDED_REPOS = new Set([
@@ -13,7 +14,7 @@ const EXCLUDED_REPOS = new Set([
 
 const FEATURED_COUNT = 6;
 
-function headers(): HeadersInit {
+function githubHeaders(): HeadersInit {
   const h: HeadersInit = {
     Accept: "application/vnd.github.v3+json",
   };
@@ -28,7 +29,7 @@ export async function getProjects(): Promise<Project[]> {
   try {
     const res = await fetch(
       `${GITHUB_API}/orgs/${ORG}/repos?per_page=100&sort=stars&direction=desc`,
-      { headers: headers() },
+      { headers: githubHeaders() },
     );
     if (!res.ok) throw new Error(`GitHub API: ${res.status}`);
 
@@ -61,31 +62,34 @@ export async function getProjects(): Promise<Project[]> {
   }
 }
 
+async function getTotalDownloads(projects: Project[]): Promise<number> {
+  try {
+    const results = await Promise.allSettled(
+      projects.map(async (p) => {
+        const pkgName = p.name.replace(/-/g, "_");
+        const res = await fetch(`${HEX_API}/packages/${pkgName}`);
+        if (!res.ok) return 0;
+        const data = await res.json();
+        return (data?.downloads?.all as number) ?? 0;
+      }),
+    );
+    return results.reduce((sum, r) => sum + (r.status === "fulfilled" ? r.value : 0), 0);
+  } catch {
+    return FALLBACK_STATS.totalDownloads;
+  }
+}
+
 export async function getOrgStats(
   projects: Project[],
 ): Promise<OrgStats> {
   const totalStars = projects.reduce((sum, p) => sum + p.stars, 0);
   const totalForks = projects.reduce((sum, p) => sum + p.forks, 0);
+  const totalDownloads = await getTotalDownloads(projects);
 
-  try {
-    const res = await fetch(`${GITHUB_API}/orgs/${ORG}/members?per_page=100`, {
-      headers: headers(),
-    });
-    if (!res.ok) throw new Error(`GitHub API: ${res.status}`);
-    const members = await res.json();
-
-    return {
-      totalStars,
-      totalForks,
-      projectCount: projects.length,
-      memberCount: Array.isArray(members) ? members.length : FALLBACK_STATS.memberCount,
-    };
-  } catch {
-    return {
-      totalStars,
-      totalForks,
-      projectCount: projects.length,
-      memberCount: FALLBACK_STATS.memberCount,
-    };
-  }
+  return {
+    totalStars,
+    totalForks,
+    projectCount: projects.length,
+    totalDownloads,
+  };
 }

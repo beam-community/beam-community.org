@@ -14,5 +14,5 @@ export interface OrgStats {
   totalStars: number;
   totalForks: number;
   projectCount: number;
-  memberCount: number;
+  totalDownloads: number;
 }

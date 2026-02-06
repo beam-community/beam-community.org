@@ -168,5 +168,5 @@ export const FALLBACK_STATS: OrgStats = {
   totalStars: 7900,
   totalForks: 1400,
   projectCount: 15,
-  memberCount: 21,
+  totalDownloads: 50_000_000,
 };
