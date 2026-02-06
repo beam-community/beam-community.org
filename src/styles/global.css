@@ -18,13 +18,17 @@
   --color-purple-900: #4c1d95;
   --color-purple-950: #2e1065;
 
+  --color-accent-100: #ffedd5;
   --color-accent-400: #fb923c;
   --color-accent-500: #f97316;
   --color-accent-600: #ea580c;
+  --color-accent-700: #c2410c;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {

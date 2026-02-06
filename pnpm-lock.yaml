@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@eslint/plugin-kit': ^0.2.8
+
 importers:
 
   .:

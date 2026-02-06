@@ -86,9 +86,13 @@ import { Icon } from "astro-icon/components";
     if (window.scrollY > 50) {
       nav.classList.add("bg-white", "shadow-md");
       nav.classList.remove("bg-transparent");
-      nav.querySelectorAll(".nav-brand, .nav-link").forEach((el) => {
-        el.classList.remove("text-white", "text-white/80");
-        el.classList.add("text-slate-900", "text-slate-600");
+      nav.querySelectorAll(".nav-brand").forEach((el) => {
+        el.classList.remove("text-white");
+        el.classList.add("text-slate-900");
+      });
+      nav.querySelectorAll(".nav-link").forEach((el) => {
+        el.classList.remove("text-white/80", "hover:text-white");
+        el.classList.add("text-slate-600", "hover:text-slate-900");
       });
       btn.classList.remove("text-white/80", "hover:text-white");
       btn.classList.add("text-slate-600", "hover:text-slate-900");
@@ -96,15 +100,15 @@ import { Icon } from "astro-icon/components";
       nav.classList.remove("bg-white", "shadow-md");
       nav.classList.add("bg-transparent");
       nav.querySelectorAll(".nav-brand").forEach((el) => {
-        el.classList.add("text-white");
         el.classList.remove("text-slate-900");
+        el.classList.add("text-white");
       });
       nav.querySelectorAll(".nav-link").forEach((el) => {
-        el.classList.add("text-white/80");
-        el.classList.remove("text-slate-600");
+        el.classList.remove("text-slate-600", "hover:text-slate-900");
+        el.classList.add("text-white/80", "hover:text-white");
       });
-      btn.classList.add("text-white/80", "hover:text-white");
       btn.classList.remove("text-slate-600", "hover:text-slate-900");
+      btn.classList.add("text-white/80", "hover:text-white");
     }
   }
 
