@@ -1,0 +1,21 @@
+---
+import type { OrgStats } from "../lib/types";
+import StatItem from "./StatItem.astro";
+
+interface Props {
+  stats: OrgStats;
+}
+
+const { stats } = Astro.props;
+---
+
+<section class="py-16 bg-gradient-to-r from-purple-900 to-purple-800">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-8">
+      <StatItem value={stats.totalStars} label="GitHub Stars" />
+      <StatItem value={stats.totalForks} label="Forks" />
+      <StatItem value={stats.projectCount} label="Active Projects" />
+      <StatItem value={stats.memberCount} label="Maintainers" />
+    </div>
+  </div>
+</section>

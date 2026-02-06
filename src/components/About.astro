@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon/components";
+import { ABOUT_FEATURES } from "../lib/constants";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="about" class="py-20 sm:py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading
+      title="What is BEAM Community?"
+      subtitle="A community-driven organization that maintains and grows critical open source packages for the Elixir and Erlang ecosystem."
+    />
+
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      <!-- Mission text -->
+      <div class="space-y-4 text-slate-600 leading-relaxed">
+        <p>
+          <strong class="text-slate-900">BEAM Community</strong> is a collection of open source
+          projects maintained by a dedicated group of volunteers. We serve as stewards for libraries
+          that the Elixir and Erlang ecosystem depends on every day.
+        </p>
+        <p>
+          Like the Apache Software Foundation does for the Java ecosystem, we provide a home for
+          community-critical packages — ensuring they receive ongoing maintenance, security updates,
+          and thoughtful evolution even as original authors move on.
+        </p>
+        <p>
+          BEAM is part of the Erlang Run-Time System (ERTS), the virtual machine that powers both
+          Elixir and Erlang. It's known for building fault-tolerant, concurrent, and distributed
+          systems — and our projects help developers make the most of it.
+        </p>
+      </div>
+
+      <!-- Feature cards -->
+      <div class="grid sm:grid-cols-2 gap-6">
+        {
+          ABOUT_FEATURES.map((feature) => (
+            <div class="p-5 rounded-xl bg-purple-50 border border-purple-100">
+              <Icon name={feature.icon} class="w-8 h-8 text-purple-600 mb-3" />
+              <h3 class="font-semibold text-slate-900 mb-1">{feature.title}</h3>
+              <p class="text-sm text-slate-600">{feature.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

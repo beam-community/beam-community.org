@@ -1,10 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import ProjectGrid from "../components/ProjectGrid.astro";
+import Stats from "../components/Stats.astro";
+import GetInvolved from "../components/GetInvolved.astro";
+import Footer from "../components/Footer.astro";
+import { getProjects, getOrgStats } from "../lib/github";
+
+const projects = await getProjects();
+const stats = await getOrgStats(projects);
 ---
 
 <Layout>
-  <main>
-    <h1 class="text-4xl font-bold text-purple-900 p-8">BEAM Community</h1>
-    <p class="px-8 text-slate-600">Site is being rebuilt.</p>
-  </main>
+  <Navigation />
+  <Hero stats={stats} />
+  <About />
+  <ProjectGrid projects={projects} />
+  <Stats stats={stats} />
+  <GetInvolved />
+  <Footer />
 </Layout>
