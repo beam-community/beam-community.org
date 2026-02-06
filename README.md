@@ -2,31 +2,33 @@
 
 [![Build](https://github.com/beam-community/beam-community.org/actions/workflows/build.yml/badge.svg)](https://github.com/beam-community/beam-community.org/actions/workflows/build.yml)
 
-This is the official website for the BEAM Community, a collection of open source projects for the Erlang ecosystem.
+The official website for [BEAM Community](https://beam-community.org), a collection of open source projects for the Elixir and Erlang ecosystem.
 
 ## Technology Stack
 
-- Next.js - React framework
-- TypeScript - Type-safe JavaScript
-- Bulma - CSS framework
+- [Astro](https://astro.build) - Static site generator
+- [Tailwind CSS](https://tailwindcss.com) v4 - Utility-first CSS
+- [TypeScript](https://www.typescriptlang.org) - Type-safe JavaScript
+- [astro-icon](https://github.com/natemoo-re/astro-icon) - Inline SVG icons
 
 ## Development
-
-To run the development server:
 
 ```bash
 mise install
 pnpm install
-pnpm run dev
+pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:4321](http://localhost:4321) to see the site.
 
-## Learn More
+## Building
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Static output is generated in the `dist/` directory.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Data
+
+Project data is fetched from the GitHub API at build time. Set a `GITHUB_TOKEN` environment variable for higher rate limits. If the API is unreachable, the build falls back to static data in `src/lib/constants.ts`.
