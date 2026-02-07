@@ -13,11 +13,16 @@ interface Props {
   description?: string;
   project: DocumentedProject;
   isIndex?: boolean;
+  entryId?: string;
 }
 
-const { title, description, project, isIndex = false } = Astro.props;
+const GITHUB_EDIT_BASE =
+  "https://github.com/beam-community/beam-community.org/edit/main/src/data/docs";
+
+const { title, description, project, isIndex = false, entryId } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/$/, "");
 const pageTitle = `${title} - ${project.name} - BEAM Community`;
+const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
 ---
 
 <Layout title={pageTitle} description={description}>
@@ -108,6 +113,20 @@ const pageTitle = `${title} - ${project.name} - BEAM Community`;
         <DocsContent>
           <slot />
         </DocsContent>
+
+        {editUrl && (
+          <div class="mt-8">
+            <a
+              href={editUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-purple-700"
+            >
+              <Icon name="lucide:pencil" class="h-3.5 w-3.5" />
+              Edit this page on GitHub
+            </a>
+          </div>
+        )}
 
         <DocsNavigation project={project} currentPath={currentPath} />
       </main>
