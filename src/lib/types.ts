@@ -16,3 +16,12 @@ export interface OrgStats {
   projectCount: number;
   totalDownloads: number;
 }
+
+export interface DocumentedProject {
+  slug: string;
+  name: string;
+  description: string;
+  hexdocsUrl: string;
+  githubUrl: string;
+  hexUrl: string;
+}

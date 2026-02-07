@@ -1,0 +1,21 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  url: string;
+  name: string;
+}
+
+const { url, name } = Astro.props;
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-2 rounded-lg border border-purple-200 bg-purple-50 px-4 py-3 text-sm font-medium text-purple-700 transition-colors hover:bg-purple-100"
+>
+  <Icon name="lucide:book-open" class="h-4 w-4" />
+  {name} API Reference on HexDocs
+  <Icon name="lucide:external-link" class="h-3.5 w-3.5" />
+</a>

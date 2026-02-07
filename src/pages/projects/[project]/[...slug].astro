@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from "astro:content";
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+import { DOCUMENTED_PROJECTS } from "../../../lib/constants";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("docs");
+  return docs.map((entry) => {
+    const projectSlug = entry.data.project;
+    // The entry id includes the project prefix (e.g., "ex_machina/getting-started")
+    // For index files, the id is "ex_machina/index" -> slug should be undefined
+    // For other files, strip the project prefix to get the slug
+    const parts = entry.id.split("/");
+    parts.shift(); // Remove the project slug prefix
+    const filename = parts.join("/");
+    const slug = !filename || filename === "index" ? undefined : filename;
+
+    return {
+      params: { project: projectSlug, slug },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { project: projectSlug } = Astro.params;
+
+const project = DOCUMENTED_PROJECTS.find((p) => p.slug === projectSlug);
+if (!project) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(entry);
+const isIndex = !Astro.params.slug;
+---
+
+<DocsLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  project={project}
+  isIndex={isIndex}
+  entryId={entry.id}
+>
+  <Content />
+</DocsLayout>

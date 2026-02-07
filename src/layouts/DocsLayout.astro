@@ -1,0 +1,234 @@
+---
+import Layout from "./Layout.astro";
+import DocsSidebar from "../components/DocsSidebar.astro";
+import DocsContent from "../components/DocsContent.astro";
+import DocsBreadcrumb from "../components/DocsBreadcrumb.astro";
+import DocsNavigation from "../components/DocsNavigation.astro";
+import { Icon } from "astro-icon/components";
+import { NAV_LINKS, GITHUB_ORG_URL } from "../lib/constants";
+import type { DocumentedProject } from "../lib/types";
+
+interface Props {
+  title: string;
+  description?: string;
+  project: DocumentedProject;
+  isIndex?: boolean;
+  entryId?: string;
+}
+
+const GITHUB_EDIT_BASE =
+  "https://github.com/beam-community/beam-community.org/edit/main/src/data/docs";
+
+const { title, description, project, isIndex = false, entryId } = Astro.props;
+const currentPath = Astro.url.pathname.replace(/\/$/, "");
+const pageTitle = `${title} - ${project.name} - BEAM Community`;
+const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
+---
+
+<Layout title={pageTitle} description={description}>
+  <!-- Docs-specific navigation (solid background, not scroll-aware) -->
+  <nav class="sticky top-0 z-50 border-b border-slate-200 bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="/" class="flex items-center gap-2 text-lg font-bold text-slate-900">
+          <Icon name="lucide:hexagon" class="h-6 w-6" />
+          BEAM Community
+        </a>
+
+        <div class="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) => {
+            const isDocsLink = link.href === "/projects";
+            const isActive = isDocsLink;
+            return (
+              <a
+                href={link.href}
+                class:list={[
+                  "text-sm font-medium transition-colors",
+                  isActive
+                    ? "text-purple-700"
+                    : "text-slate-600 hover:text-slate-900",
+                ]}
+              >
+                {link.label}
+              </a>
+            );
+          })}
+          <a
+            href={GITHUB_ORG_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-slate-600 transition-colors hover:text-slate-900"
+            aria-label="BEAM Community on GitHub"
+          >
+            <Icon name="simple-icons:github" class="h-5 w-5" />
+          </a>
+        </div>
+
+        <button
+          id="docs-mobile-menu-btn"
+          class="text-slate-600 hover:text-slate-900 md:hidden"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <Icon name="lucide:menu" class="h-6 w-6" id="docs-menu-icon-open" />
+          <Icon name="lucide:x" class="hidden h-6 w-6" id="docs-menu-icon-close" />
+        </button>
+      </div>
+
+      <div id="docs-mobile-menu" class="hidden pb-4 md:hidden">
+        {NAV_LINKS.map((link) => (
+          <a
+            href={link.href}
+            class="block py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href={GITHUB_ORG_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+        >
+          GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile sidebar toggle -->
+  <div class="border-b border-slate-200 lg:hidden">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <button
+        id="docs-sidebar-toggle"
+        class="flex w-full items-center gap-2 py-3 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+        aria-expanded="false"
+        aria-controls="docs-mobile-sidebar"
+      >
+        <Icon name="lucide:book-open" class="h-4 w-4" />
+        <span>{project.name} docs</span>
+        <Icon name="lucide:chevron-down" class="ml-auto h-4 w-4 transition-transform" id="sidebar-chevron" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile sidebar overlay -->
+  <div id="docs-sidebar-backdrop" class="fixed inset-0 z-40 hidden bg-black/50 lg:hidden"></div>
+  <div
+    id="docs-mobile-sidebar"
+    class="fixed top-0 left-0 z-50 hidden h-full w-72 overflow-y-auto bg-white p-6 shadow-xl lg:hidden"
+  >
+    <div class="mb-4 flex items-center justify-between">
+      <span class="text-sm font-semibold text-slate-900">Navigation</span>
+      <button
+        id="docs-sidebar-close"
+        class="text-slate-400 hover:text-slate-600"
+        aria-label="Close sidebar"
+      >
+        <Icon name="lucide:x" class="h-5 w-5" />
+      </button>
+    </div>
+    <DocsSidebar project={project} currentPath={currentPath} />
+  </div>
+
+  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="flex gap-8">
+      <!-- Desktop sidebar -->
+      <div class="hidden lg:block">
+        <DocsSidebar project={project} currentPath={currentPath} />
+      </div>
+
+      <main class="min-w-0 flex-1">
+        <DocsBreadcrumb
+          projectName={project.name}
+          projectSlug={project.slug}
+          currentTitle={title}
+          isIndex={isIndex}
+        />
+
+        <DocsContent>
+          <slot />
+        </DocsContent>
+
+        {editUrl && (
+          <div class="mt-8">
+            <a
+              href={editUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-purple-700"
+            >
+              <Icon name="lucide:pencil" class="h-3.5 w-3.5" />
+              Edit this page on GitHub
+            </a>
+          </div>
+        )}
+
+        <DocsNavigation project={project} currentPath={currentPath} />
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Mobile nav menu toggle
+  const btn = document.getElementById("docs-mobile-menu-btn")!;
+  const menu = document.getElementById("docs-mobile-menu")!;
+  const iconOpen = document.getElementById("docs-menu-icon-open")!;
+  const iconClose = document.getElementById("docs-menu-icon-close")!;
+
+  btn.addEventListener("click", () => {
+    const expanded = menu.classList.toggle("hidden");
+    btn.setAttribute("aria-expanded", String(!expanded));
+    iconOpen.classList.toggle("hidden");
+    iconClose.classList.toggle("hidden");
+  });
+
+  menu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.classList.add("hidden");
+      iconOpen.classList.remove("hidden");
+      iconClose.classList.add("hidden");
+      btn.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // Mobile sidebar toggle
+  const sidebarToggle = document.getElementById("docs-sidebar-toggle")!;
+  const sidebar = document.getElementById("docs-mobile-sidebar")!;
+  const backdrop = document.getElementById("docs-sidebar-backdrop")!;
+  const sidebarClose = document.getElementById("docs-sidebar-close")!;
+  const chevron = document.getElementById("sidebar-chevron")!;
+
+  function openSidebar() {
+    sidebar.classList.remove("hidden");
+    backdrop.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    sidebarToggle.setAttribute("aria-expanded", "true");
+    chevron.style.transform = "rotate(180deg)";
+  }
+
+  function closeSidebar() {
+    sidebar.classList.add("hidden");
+    backdrop.classList.add("hidden");
+    document.body.style.overflow = "";
+    sidebarToggle.setAttribute("aria-expanded", "false");
+    chevron.style.transform = "";
+  }
+
+  sidebarToggle.addEventListener("click", () => {
+    const isHidden = sidebar.classList.contains("hidden");
+    if (isHidden) {
+      openSidebar();
+    } else {
+      closeSidebar();
+    }
+  });
+
+  sidebarClose.addEventListener("click", closeSidebar);
+  backdrop.addEventListener("click", closeSidebar);
+
+  sidebar.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeSidebar);
+  });
+</script>

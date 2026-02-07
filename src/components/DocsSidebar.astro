@@ -1,0 +1,115 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import type { DocumentedProject } from "../lib/types";
+
+interface Props {
+  project: DocumentedProject;
+  currentPath: string;
+}
+
+const { project, currentPath } = Astro.props;
+
+const allDocs = await getCollection("docs", (entry) => {
+  return entry.data.project === project.slug;
+});
+
+const sorted = allDocs.sort((a, b) => a.data.order - b.data.order);
+
+const sections = [
+  { key: "overview" as const, label: "Overview" },
+  { key: "guides" as const, label: "Guides" },
+  { key: "resources" as const, label: "Resources" },
+];
+
+function getDocPath(entry: (typeof allDocs)[number]): string {
+  // The glob loader generates ids like "ex_machina" for index.md
+  // and "ex_machina/getting-started" for other files
+  const slug = entry.id.replace(`${project.slug}/`, "").replace(project.slug, "");
+  if (!slug || slug === "index") {
+    return `/projects/${project.slug}`;
+  }
+  return `/projects/${project.slug}/${slug}`;
+}
+---
+
+<aside class="w-64 shrink-0">
+  <nav class="sticky top-20 space-y-6">
+    <div>
+      <a
+        href={`/projects/${project.slug}`}
+        class="text-lg font-semibold text-slate-900 hover:text-purple-700 transition-colors"
+      >
+        {project.name}
+      </a>
+    </div>
+
+    {sections.map((section) => {
+      const entries = sorted.filter((e) => e.data.section === section.key);
+      if (entries.length === 0) return null;
+      return (
+        <div>
+          <h3 class="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            {section.label}
+          </h3>
+          <ul class="space-y-1">
+            {entries.map((entry) => {
+              const href = getDocPath(entry);
+              const isActive = currentPath === href;
+              return (
+                <li>
+                  <a
+                    href={href}
+                    class:list={[
+                      "block rounded-md px-3 py-1.5 text-sm transition-colors",
+                      isActive
+                        ? "bg-purple-50 font-medium text-purple-700"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+                    ]}
+                  >
+                    {entry.data.title}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      );
+    })}
+
+    <hr class="border-slate-200" />
+
+    <div class="space-y-2">
+      <a
+        href={project.hexdocsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 text-sm text-slate-500 hover:text-purple-700 transition-colors"
+      >
+        <Icon name="lucide:book-open" class="h-4 w-4" />
+        API Reference
+        <Icon name="lucide:external-link" class="h-3 w-3" />
+      </a>
+      <a
+        href={project.githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 text-sm text-slate-500 hover:text-purple-700 transition-colors"
+      >
+        <Icon name="simple-icons:github" class="h-4 w-4" />
+        GitHub
+        <Icon name="lucide:external-link" class="h-3 w-3" />
+      </a>
+      <a
+        href={project.hexUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 text-sm text-slate-500 hover:text-purple-700 transition-colors"
+      >
+        <Icon name="simple-icons:elixir" class="h-4 w-4" />
+        Hex.pm
+        <Icon name="lucide:external-link" class="h-3 w-3" />
+      </a>
+    </div>
+  </nav>
+</aside>

@@ -1,0 +1,78 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { DOCUMENTED_PROJECTS, NAV_LINKS, GITHUB_ORG_URL } from "../../lib/constants";
+---
+
+<Layout
+  title="Documentation - BEAM Community"
+  description="Guides and documentation for BEAM Community open source libraries."
+>
+  <nav class="sticky top-0 z-50 border-b border-slate-200 bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="/" class="flex items-center gap-2 text-lg font-bold text-slate-900">
+          <Icon name="lucide:hexagon" class="h-6 w-6" />
+          BEAM Community
+        </a>
+
+        <div class="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) => {
+            const isActive = link.href === "/projects";
+            return (
+              <a
+                href={link.href}
+                class:list={[
+                  "text-sm font-medium transition-colors",
+                  isActive
+                    ? "text-purple-700"
+                    : "text-slate-600 hover:text-slate-900",
+                ]}
+              >
+                {link.label}
+              </a>
+            );
+          })}
+          <a
+            href={GITHUB_ORG_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-slate-600 transition-colors hover:text-slate-900"
+            aria-label="BEAM Community on GitHub"
+          >
+            <Icon name="simple-icons:github" class="h-5 w-5" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-slate-900">Documentation</h1>
+      <p class="mt-2 text-lg text-slate-600">
+        Guides and documentation for BEAM Community libraries.
+      </p>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2">
+      {DOCUMENTED_PROJECTS.map((project) => (
+        <a
+          href={`/projects/${project.slug}`}
+          class="group block rounded-xl border border-slate-200 bg-white p-6 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:border-purple-200"
+        >
+          <h2 class="text-lg font-semibold text-slate-900 group-hover:text-purple-700 transition-colors">
+            {project.name}
+          </h2>
+          <p class="mt-2 text-sm text-slate-600">
+            {project.description}
+          </p>
+          <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-purple-700">
+            View docs
+            <Icon name="lucide:arrow-right" class="h-4 w-4" />
+          </span>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>

@@ -12,6 +12,7 @@
 		"lint:strict": "eslint --max-warnings=0 . --ext .js,.ts,.astro"
 	},
 	"dependencies": {
+		"@astrojs/mdx": "^4.3.13",
 		"@fontsource/inter": "^5.1.1",
 		"astro": "^5.3.0",
 		"astro-icon": "^1.1.5"
@@ -20,6 +21,7 @@
 		"@eslint/js": "^9.22.0",
 		"@iconify-json/lucide": "^1.2.34",
 		"@iconify-json/simple-icons": "^1.2.30",
+		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.0.0",
 		"eslint": "^9.22.0",
 		"eslint-plugin-astro": "^1.3.1",

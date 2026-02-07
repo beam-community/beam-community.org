@@ -1,5 +1,6 @@
 ---
 import type { Project } from "../lib/types";
+import { DOCUMENTED_PROJECT_SLUGS } from "../lib/constants";
 import { Icon } from "astro-icon/components";
 import Badge from "./Badge.astro";
 
@@ -8,12 +9,14 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const hasDocs = DOCUMENTED_PROJECT_SLUGS.has(project.name);
+const href = hasDocs ? `/projects/${project.name}` : project.url;
+const isExternal = !hasDocs;
 ---
 
 <a
-  href={project.url}
-  target="_blank"
-  rel="noopener noreferrer"
+  href={href}
+  {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
   class:list={[
     "group block rounded-xl border bg-white p-6 transition-all hover:shadow-lg hover:-translate-y-0.5",
     project.isFeatured ? "border-purple-200 ring-1 ring-purple-100" : "border-slate-200",

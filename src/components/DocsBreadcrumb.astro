@@ -1,0 +1,51 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  projectName: string;
+  projectSlug: string;
+  currentTitle: string;
+  isIndex?: boolean;
+}
+
+const { projectName, projectSlug, currentTitle, isIndex = false } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="mb-6">
+  <ol class="flex flex-wrap items-center gap-1 text-sm text-slate-500">
+    <li>
+      <a href="/" class="transition-colors hover:text-slate-900">Home</a>
+    </li>
+    <li>
+      <Icon name="lucide:chevron-right" class="h-3.5 w-3.5 text-slate-400" />
+    </li>
+    <li>
+      <a href="/projects" class="transition-colors hover:text-slate-900">Docs</a>
+    </li>
+    <li>
+      <Icon name="lucide:chevron-right" class="h-3.5 w-3.5 text-slate-400" />
+    </li>
+    {isIndex ? (
+      <li>
+        <span class="font-medium text-slate-900">{projectName}</span>
+      </li>
+    ) : (
+      <>
+        <li>
+          <a
+            href={`/projects/${projectSlug}`}
+            class="transition-colors hover:text-slate-900"
+          >
+            {projectName}
+          </a>
+        </li>
+        <li>
+          <Icon name="lucide:chevron-right" class="h-3.5 w-3.5 text-slate-400" />
+        </li>
+        <li>
+          <span class="font-medium text-slate-900">{currentTitle}</span>
+        </li>
+      </>
+    )}
+  </ol>
+</nav>
