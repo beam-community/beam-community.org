@@ -38,7 +38,7 @@ function getDocPath(entry: (typeof allDocs)[number]): string {
     <div>
       <a
         href={`/projects/${project.slug}`}
-        class="text-lg font-semibold text-slate-900 hover:text-purple-700 transition-colors"
+        class="text-lg font-semibold text-slate-900 dark:text-white hover:text-purple-700 dark:hover:text-purple-400 transition-colors"
       >
         {project.name}
       </a>
@@ -49,7 +49,7 @@ function getDocPath(entry: (typeof allDocs)[number]): string {
       if (entries.length === 0) return null;
       return (
         <div>
-          <h3 class="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          <h3 class="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
             {section.label}
           </h3>
           <ul class="space-y-1">
@@ -63,8 +63,8 @@ function getDocPath(entry: (typeof allDocs)[number]): string {
                     class:list={[
                       "block rounded-md px-3 py-1.5 text-sm transition-colors",
                       isActive
-                        ? "bg-purple-50 font-medium text-purple-700"
-                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+                        ? "bg-purple-50 dark:bg-purple-950/50 font-medium text-purple-700 dark:text-purple-400"
+                        : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white",
                     ]}
                   >
                     {entry.data.title}
@@ -77,14 +77,14 @@ function getDocPath(entry: (typeof allDocs)[number]): string {
       );
     })}
 
-    <hr class="border-slate-200" />
+    <hr class="border-slate-200 dark:border-slate-700" />
 
     <div class="space-y-2">
       <a
         href={project.hexdocsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="flex items-center gap-2 text-sm text-slate-500 hover:text-purple-700 transition-colors"
+        class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-purple-700 dark:hover:text-purple-400 transition-colors"
       >
         <Icon name="lucide:book-open" class="h-4 w-4" />
         API Reference
@@ -94,7 +94,7 @@ function getDocPath(entry: (typeof allDocs)[number]): string {
         href={project.githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="flex items-center gap-2 text-sm text-slate-500 hover:text-purple-700 transition-colors"
+        class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-purple-700 dark:hover:text-purple-400 transition-colors"
       >
         <Icon name="simple-icons:github" class="h-4 w-4" />
         GitHub
@@ -104,7 +104,7 @@ function getDocPath(entry: (typeof allDocs)[number]): string {
         href={project.hexUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="flex items-center gap-2 text-sm text-slate-500 hover:text-purple-700 transition-colors"
+        class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-purple-700 dark:hover:text-purple-400 transition-colors"
       >
         <Icon name="simple-icons:elixir" class="h-4 w-4" />
         Hex.pm
