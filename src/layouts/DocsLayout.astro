@@ -96,8 +96,44 @@ const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
     </div>
   </nav>
 
+  <!-- Mobile sidebar toggle -->
+  <div class="border-b border-slate-200 lg:hidden">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <button
+        id="docs-sidebar-toggle"
+        class="flex w-full items-center gap-2 py-3 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+        aria-expanded="false"
+        aria-controls="docs-mobile-sidebar"
+      >
+        <Icon name="lucide:book-open" class="h-4 w-4" />
+        <span>{project.name} docs</span>
+        <Icon name="lucide:chevron-down" class="ml-auto h-4 w-4 transition-transform" id="sidebar-chevron" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile sidebar overlay -->
+  <div id="docs-sidebar-backdrop" class="fixed inset-0 z-40 hidden bg-black/50 lg:hidden"></div>
+  <div
+    id="docs-mobile-sidebar"
+    class="fixed top-0 left-0 z-50 hidden h-full w-72 overflow-y-auto bg-white p-6 shadow-xl lg:hidden"
+  >
+    <div class="mb-4 flex items-center justify-between">
+      <span class="text-sm font-semibold text-slate-900">Navigation</span>
+      <button
+        id="docs-sidebar-close"
+        class="text-slate-400 hover:text-slate-600"
+        aria-label="Close sidebar"
+      >
+        <Icon name="lucide:x" class="h-5 w-5" />
+      </button>
+    </div>
+    <DocsSidebar project={project} currentPath={currentPath} />
+  </div>
+
   <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="flex gap-8">
+      <!-- Desktop sidebar -->
       <div class="hidden lg:block">
         <DocsSidebar project={project} currentPath={currentPath} />
       </div>
@@ -135,6 +171,7 @@ const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
 </Layout>
 
 <script>
+  // Mobile nav menu toggle
   const btn = document.getElementById("docs-mobile-menu-btn")!;
   const menu = document.getElementById("docs-mobile-menu")!;
   const iconOpen = document.getElementById("docs-menu-icon-open")!;
@@ -154,5 +191,44 @@ const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
       iconClose.classList.add("hidden");
       btn.setAttribute("aria-expanded", "false");
     });
+  });
+
+  // Mobile sidebar toggle
+  const sidebarToggle = document.getElementById("docs-sidebar-toggle")!;
+  const sidebar = document.getElementById("docs-mobile-sidebar")!;
+  const backdrop = document.getElementById("docs-sidebar-backdrop")!;
+  const sidebarClose = document.getElementById("docs-sidebar-close")!;
+  const chevron = document.getElementById("sidebar-chevron")!;
+
+  function openSidebar() {
+    sidebar.classList.remove("hidden");
+    backdrop.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    sidebarToggle.setAttribute("aria-expanded", "true");
+    chevron.style.transform = "rotate(180deg)";
+  }
+
+  function closeSidebar() {
+    sidebar.classList.add("hidden");
+    backdrop.classList.add("hidden");
+    document.body.style.overflow = "";
+    sidebarToggle.setAttribute("aria-expanded", "false");
+    chevron.style.transform = "";
+  }
+
+  sidebarToggle.addEventListener("click", () => {
+    const isHidden = sidebar.classList.contains("hidden");
+    if (isHidden) {
+      openSidebar();
+    } else {
+      closeSidebar();
+    }
+  });
+
+  sidebarClose.addEventListener("click", closeSidebar);
+  backdrop.addEventListener("click", closeSidebar);
+
+  sidebar.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeSidebar);
   });
 </script>
