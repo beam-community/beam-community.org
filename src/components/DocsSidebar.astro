@@ -23,14 +23,12 @@ const sections = [
 ];
 
 function getDocPath(entry: (typeof allDocs)[number]): string {
-  const parts = entry.id.split("/");
-  // index files map to /projects/{project}
-  const filename = parts[parts.length - 1];
-  if (filename === "index") {
+  // The glob loader generates ids like "ex_machina" for index.md
+  // and "ex_machina/getting-started" for other files
+  const slug = entry.id.replace(`${project.slug}/`, "").replace(project.slug, "");
+  if (!slug || slug === "index") {
     return `/projects/${project.slug}`;
   }
-  // Remove the project prefix from the id to get the slug
-  const slug = entry.id.replace(`${project.slug}/`, "");
   return `/projects/${project.slug}/${slug}`;
 }
 ---
