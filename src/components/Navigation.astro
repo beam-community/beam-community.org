@@ -1,6 +1,7 @@
 ---
 import { NAV_LINKS, GITHUB_ORG_URL } from "../lib/constants";
 import { Icon } from "astro-icon/components";
+import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <nav
@@ -36,18 +37,22 @@ import { Icon } from "astro-icon/components";
         >
           <Icon name="simple-icons:github" class="w-5 h-5" />
         </a>
+        <ThemeToggle />
       </div>
 
       <!-- Mobile menu button -->
-      <button
-        id="mobile-menu-btn"
-        class="md:hidden text-white/80 hover:text-white"
-        aria-label="Toggle menu"
-        aria-expanded="false"
-      >
-        <Icon name="lucide:menu" class="w-6 h-6" id="menu-icon-open" />
-        <Icon name="lucide:x" class="w-6 h-6 hidden" id="menu-icon-close" />
-      </button>
+      <div class="flex items-center gap-2 md:hidden">
+        <ThemeToggle />
+        <button
+          id="mobile-menu-btn"
+          class="text-white/80 hover:text-white"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <Icon name="lucide:menu" class="w-6 h-6" id="menu-icon-open" />
+          <Icon name="lucide:x" class="w-6 h-6 hidden" id="menu-icon-close" />
+        </button>
+      </div>
     </div>
 
     <!-- Mobile menu -->
@@ -83,37 +88,64 @@ import { Icon } from "astro-icon/components";
 
   // Scroll-aware background
   function updateNav() {
+    const isDark = document.documentElement.classList.contains("dark");
     if (window.scrollY > 50) {
-      nav.classList.add("bg-white", "shadow-md");
+      nav.classList.add("shadow-md");
       nav.classList.remove("bg-transparent");
+      if (isDark) {
+        nav.classList.add("bg-slate-900");
+        nav.classList.remove("bg-white");
+      } else {
+        nav.classList.add("bg-white");
+        nav.classList.remove("bg-slate-900");
+      }
       nav.querySelectorAll(".nav-brand").forEach((el) => {
         el.classList.remove("text-white");
-        el.classList.add("text-slate-900");
+        el.classList.add(isDark ? "text-white" : "text-slate-900");
       });
       nav.querySelectorAll(".nav-link").forEach((el) => {
         el.classList.remove("text-white/80", "hover:text-white");
-        el.classList.add("text-slate-600", "hover:text-slate-900");
+        if (isDark) {
+          el.classList.remove("text-slate-600", "hover:text-slate-900");
+          el.classList.add("text-slate-300", "hover:text-white");
+        } else {
+          el.classList.remove("text-slate-300");
+          el.classList.add("text-slate-600", "hover:text-slate-900");
+        }
       });
       btn.classList.remove("text-white/80", "hover:text-white");
-      btn.classList.add("text-slate-600", "hover:text-slate-900");
+      if (isDark) {
+        btn.classList.remove("text-slate-600", "hover:text-slate-900");
+        btn.classList.add("text-slate-300", "hover:text-white");
+      } else {
+        btn.classList.remove("text-slate-300");
+        btn.classList.add("text-slate-600", "hover:text-slate-900");
+      }
     } else {
-      nav.classList.remove("bg-white", "shadow-md");
+      nav.classList.remove("bg-white", "bg-slate-900", "shadow-md");
       nav.classList.add("bg-transparent");
       nav.querySelectorAll(".nav-brand").forEach((el) => {
         el.classList.remove("text-slate-900");
         el.classList.add("text-white");
       });
       nav.querySelectorAll(".nav-link").forEach((el) => {
-        el.classList.remove("text-slate-600", "hover:text-slate-900");
+        el.classList.remove("text-slate-600", "hover:text-slate-900", "text-slate-300");
         el.classList.add("text-white/80", "hover:text-white");
       });
-      btn.classList.remove("text-slate-600", "hover:text-slate-900");
+      btn.classList.remove("text-slate-600", "hover:text-slate-900", "text-slate-300");
       btn.classList.add("text-white/80", "hover:text-white");
     }
   }
 
   window.addEventListener("scroll", updateNav, { passive: true });
   updateNav();
+
+  // Re-run on theme change to update scrolled nav colors
+  const observer = new MutationObserver(() => updateNav());
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
 
   // Mobile menu toggle
   btn.addEventListener("click", () => {

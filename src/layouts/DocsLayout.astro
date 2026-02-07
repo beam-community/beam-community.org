@@ -4,6 +4,7 @@ import DocsSidebar from "../components/DocsSidebar.astro";
 import DocsContent from "../components/DocsContent.astro";
 import DocsBreadcrumb from "../components/DocsBreadcrumb.astro";
 import DocsNavigation from "../components/DocsNavigation.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 import { Icon } from "astro-icon/components";
 import { NAV_LINKS, GITHUB_ORG_URL } from "../lib/constants";
 import type { DocumentedProject } from "../lib/types";
@@ -27,10 +28,10 @@ const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
 
 <Layout title={pageTitle} description={description}>
   <!-- Docs-specific navigation (solid background, not scroll-aware) -->
-  <nav class="sticky top-0 z-50 border-b border-slate-200 bg-white">
+  <nav class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
-        <a href="/" class="flex items-center gap-2 text-lg font-bold text-slate-900">
+        <a href="/" class="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-white">
           <Icon name="lucide:hexagon" class="h-6 w-6" />
           BEAM Community
         </a>
@@ -45,8 +46,8 @@ const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
                 class:list={[
                   "text-sm font-medium transition-colors",
                   isActive
-                    ? "text-purple-700"
-                    : "text-slate-600 hover:text-slate-900",
+                    ? "text-purple-700 dark:text-purple-400"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white",
                 ]}
               >
                 {link.label}
@@ -57,29 +58,33 @@ const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
             href={GITHUB_ORG_URL}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-slate-600 transition-colors hover:text-slate-900"
+            class="text-slate-600 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white"
             aria-label="BEAM Community on GitHub"
           >
             <Icon name="simple-icons:github" class="h-5 w-5" />
           </a>
+          <ThemeToggle />
         </div>
 
-        <button
-          id="docs-mobile-menu-btn"
-          class="text-slate-600 hover:text-slate-900 md:hidden"
-          aria-label="Toggle menu"
-          aria-expanded="false"
-        >
-          <Icon name="lucide:menu" class="h-6 w-6" id="docs-menu-icon-open" />
-          <Icon name="lucide:x" class="hidden h-6 w-6" id="docs-menu-icon-close" />
-        </button>
+        <div class="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            id="docs-mobile-menu-btn"
+            class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white md:hidden"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <Icon name="lucide:menu" class="h-6 w-6" id="docs-menu-icon-open" />
+            <Icon name="lucide:x" class="hidden h-6 w-6" id="docs-menu-icon-close" />
+          </button>
+        </div>
       </div>
 
       <div id="docs-mobile-menu" class="hidden pb-4 md:hidden">
         {NAV_LINKS.map((link) => (
           <a
             href={link.href}
-            class="block py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+            class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white"
           >
             {link.label}
           </a>
@@ -88,7 +93,7 @@ const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
           href={GITHUB_ORG_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="block py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+          class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white"
         >
           GitHub
         </a>
@@ -97,11 +102,11 @@ const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
   </nav>
 
   <!-- Mobile sidebar toggle -->
-  <div class="border-b border-slate-200 lg:hidden">
+  <div class="border-b border-slate-200 dark:border-slate-700 lg:hidden">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <button
         id="docs-sidebar-toggle"
-        class="flex w-full items-center gap-2 py-3 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+        class="flex w-full items-center gap-2 py-3 text-sm font-medium text-slate-600 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white"
         aria-expanded="false"
         aria-controls="docs-mobile-sidebar"
       >
@@ -116,13 +121,13 @@ const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
   <div id="docs-sidebar-backdrop" class="fixed inset-0 z-40 hidden bg-black/50 lg:hidden"></div>
   <div
     id="docs-mobile-sidebar"
-    class="fixed top-0 left-0 z-50 hidden h-full w-72 overflow-y-auto bg-white p-6 shadow-xl lg:hidden"
+    class="fixed top-0 left-0 z-50 hidden h-full w-72 overflow-y-auto bg-white dark:bg-slate-900 p-6 shadow-xl lg:hidden"
   >
     <div class="mb-4 flex items-center justify-between">
-      <span class="text-sm font-semibold text-slate-900">Navigation</span>
+      <span class="text-sm font-semibold text-slate-900 dark:text-white">Navigation</span>
       <button
         id="docs-sidebar-close"
-        class="text-slate-400 hover:text-slate-600"
+        class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
         aria-label="Close sidebar"
       >
         <Icon name="lucide:x" class="h-5 w-5" />
@@ -156,7 +161,7 @@ const editUrl = entryId ? `${GITHUB_EDIT_BASE}/${entryId}.md` : null;
               href={editUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-purple-700"
+              class="inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-purple-700 dark:hover:text-purple-400"
             >
               <Icon name="lucide:pencil" class="h-3.5 w-3.5" />
               Edit this page on GitHub

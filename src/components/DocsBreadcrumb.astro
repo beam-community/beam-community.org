@@ -12,38 +12,38 @@ const { projectName, projectSlug, currentTitle, isIndex = false } = Astro.props;
 ---
 
 <nav aria-label="Breadcrumb" class="mb-6">
-  <ol class="flex flex-wrap items-center gap-1 text-sm text-slate-500">
+  <ol class="flex flex-wrap items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
     <li>
-      <a href="/" class="transition-colors hover:text-slate-900">Home</a>
+      <a href="/" class="transition-colors hover:text-slate-900 dark:hover:text-white">Home</a>
     </li>
     <li>
-      <Icon name="lucide:chevron-right" class="h-3.5 w-3.5 text-slate-400" />
+      <Icon name="lucide:chevron-right" class="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
     </li>
     <li>
-      <a href="/projects" class="transition-colors hover:text-slate-900">Docs</a>
+      <a href="/projects" class="transition-colors hover:text-slate-900 dark:hover:text-white">Docs</a>
     </li>
     <li>
-      <Icon name="lucide:chevron-right" class="h-3.5 w-3.5 text-slate-400" />
+      <Icon name="lucide:chevron-right" class="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
     </li>
     {isIndex ? (
       <li>
-        <span class="font-medium text-slate-900">{projectName}</span>
+        <span class="font-medium text-slate-900 dark:text-white">{projectName}</span>
       </li>
     ) : (
       <>
         <li>
           <a
             href={`/projects/${projectSlug}`}
-            class="transition-colors hover:text-slate-900"
+            class="transition-colors hover:text-slate-900 dark:hover:text-white"
           >
             {projectName}
           </a>
         </li>
         <li>
-          <Icon name="lucide:chevron-right" class="h-3.5 w-3.5 text-slate-400" />
+          <Icon name="lucide:chevron-right" class="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
         </li>
         <li>
-          <span class="font-medium text-slate-900">{currentTitle}</span>
+          <span class="font-medium text-slate-900 dark:text-white">{currentTitle}</span>
         </li>
       </>
     )}
