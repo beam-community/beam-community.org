@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/beam-community/beam-community.org/compare/v1.0.1...v1.1.0) (2026-02-07)
+
+
+### Features
+
+* add dark mode with system preference detection and toggle ([#47](https://github.com/beam-community/beam-community.org/issues/47)) ([d6c2b25](https://github.com/beam-community/beam-community.org/commit/d6c2b2516708d45fe6714dbfffc90c6407bfd6b2))
+
 ## [1.0.1](https://github.com/beam-community/beam-community.org/compare/v1.0.0...v1.0.1) (2026-02-06)
 
 
