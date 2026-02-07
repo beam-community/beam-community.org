@@ -1,0 +1,132 @@
+---
+import Layout from "./Layout.astro";
+import DocsSidebar from "../components/DocsSidebar.astro";
+import DocsContent from "../components/DocsContent.astro";
+import HexDocsLink from "../components/HexDocsLink.astro";
+import { Icon } from "astro-icon/components";
+import { NAV_LINKS, GITHUB_ORG_URL } from "../lib/constants";
+import type { DocumentedProject } from "../lib/types";
+
+interface Props {
+  title: string;
+  description?: string;
+  project: DocumentedProject;
+}
+
+const { title, description, project } = Astro.props;
+const currentPath = Astro.url.pathname.replace(/\/$/, "");
+const pageTitle = `${title} - ${project.name} - BEAM Community`;
+---
+
+<Layout title={pageTitle} description={description}>
+  <!-- Docs-specific navigation (solid background, not scroll-aware) -->
+  <nav class="sticky top-0 z-50 border-b border-slate-200 bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="/" class="flex items-center gap-2 text-lg font-bold text-slate-900">
+          <Icon name="lucide:hexagon" class="h-6 w-6" />
+          BEAM Community
+        </a>
+
+        <div class="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) => {
+            const isDocsLink = link.href === "/projects";
+            const isActive = isDocsLink;
+            return (
+              <a
+                href={link.href}
+                class:list={[
+                  "text-sm font-medium transition-colors",
+                  isActive
+                    ? "text-purple-700"
+                    : "text-slate-600 hover:text-slate-900",
+                ]}
+              >
+                {link.label}
+              </a>
+            );
+          })}
+          <a
+            href={GITHUB_ORG_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-slate-600 transition-colors hover:text-slate-900"
+            aria-label="BEAM Community on GitHub"
+          >
+            <Icon name="simple-icons:github" class="h-5 w-5" />
+          </a>
+        </div>
+
+        <button
+          id="docs-mobile-menu-btn"
+          class="text-slate-600 hover:text-slate-900 md:hidden"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <Icon name="lucide:menu" class="h-6 w-6" id="docs-menu-icon-open" />
+          <Icon name="lucide:x" class="hidden h-6 w-6" id="docs-menu-icon-close" />
+        </button>
+      </div>
+
+      <div id="docs-mobile-menu" class="hidden pb-4 md:hidden">
+        {NAV_LINKS.map((link) => (
+          <a
+            href={link.href}
+            class="block py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href={GITHUB_ORG_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+        >
+          GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="flex gap-8">
+      <div class="hidden lg:block">
+        <DocsSidebar project={project} currentPath={currentPath} />
+      </div>
+
+      <main class="min-w-0 flex-1">
+        <div class="mb-6">
+          <HexDocsLink url={project.hexdocsUrl} name={project.name} />
+        </div>
+
+        <DocsContent>
+          <slot />
+        </DocsContent>
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const btn = document.getElementById("docs-mobile-menu-btn")!;
+  const menu = document.getElementById("docs-mobile-menu")!;
+  const iconOpen = document.getElementById("docs-menu-icon-open")!;
+  const iconClose = document.getElementById("docs-menu-icon-close")!;
+
+  btn.addEventListener("click", () => {
+    const expanded = menu.classList.toggle("hidden");
+    btn.setAttribute("aria-expanded", String(!expanded));
+    iconOpen.classList.toggle("hidden");
+    iconClose.classList.toggle("hidden");
+  });
+
+  menu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.classList.add("hidden");
+      iconOpen.classList.remove("hidden");
+      iconClose.classList.add("hidden");
+      btn.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>

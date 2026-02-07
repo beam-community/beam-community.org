@@ -1,8 +1,9 @@
-import type { Project, OrgStats } from "./types";
+import type { Project, OrgStats, DocumentedProject } from "./types";
 
 export const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
+  { href: "/projects", label: "Docs" },
   { href: "#get-involved", label: "Get Involved" },
 ];
 
@@ -170,3 +171,43 @@ export const FALLBACK_STATS: OrgStats = {
   projectCount: 15,
   totalDownloads: 50_000_000,
 };
+
+export const DOCUMENTED_PROJECTS: DocumentedProject[] = [
+  {
+    slug: "ex_machina",
+    name: "ExMachina",
+    description: "Create test data for Elixir applications",
+    hexdocsUrl: "https://hexdocs.pm/ex_machina",
+    githubUrl: "https://github.com/beam-community/ex_machina",
+    hexUrl: "https://hex.pm/packages/ex_machina",
+  },
+  {
+    slug: "bamboo",
+    name: "Bamboo",
+    description:
+      "Testable, composable, and adapter-based Elixir email library",
+    hexdocsUrl: "https://hexdocs.pm/bamboo",
+    githubUrl: "https://github.com/beam-community/bamboo",
+    hexUrl: "https://hex.pm/packages/bamboo",
+  },
+  {
+    slug: "jsonapi",
+    name: "JSONAPI",
+    description: "JSON:API Serializer and Query Handler for Elixir",
+    hexdocsUrl: "https://hexdocs.pm/jsonapi",
+    githubUrl: "https://github.com/beam-community/jsonapi",
+    hexUrl: "https://hex.pm/packages/jsonapi",
+  },
+  {
+    slug: "scrivener_headers",
+    name: "Scrivener Headers",
+    description: "Scrivener pagination with HTTP headers and web linking",
+    hexdocsUrl: "https://hexdocs.pm/scrivener_headers",
+    githubUrl: "https://github.com/beam-community/scrivener_headers",
+    hexUrl: "https://hex.pm/packages/scrivener_headers",
+  },
+];
+
+export const DOCUMENTED_PROJECT_SLUGS = new Set(
+  DOCUMENTED_PROJECTS.map((p) => p.slug),
+);
