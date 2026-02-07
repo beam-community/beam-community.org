@@ -31,12 +31,14 @@ if (!project) {
 }
 
 const { Content } = await render(entry);
+const isIndex = !Astro.params.slug;
 ---
 
 <DocsLayout
   title={entry.data.title}
   description={entry.data.description}
   project={project}
+  isIndex={isIndex}
 >
   <Content />
 </DocsLayout>

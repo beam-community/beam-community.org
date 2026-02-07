@@ -2,7 +2,7 @@
 import Layout from "./Layout.astro";
 import DocsSidebar from "../components/DocsSidebar.astro";
 import DocsContent from "../components/DocsContent.astro";
-import HexDocsLink from "../components/HexDocsLink.astro";
+import DocsBreadcrumb from "../components/DocsBreadcrumb.astro";
 import { Icon } from "astro-icon/components";
 import { NAV_LINKS, GITHUB_ORG_URL } from "../lib/constants";
 import type { DocumentedProject } from "../lib/types";
@@ -11,9 +11,10 @@ interface Props {
   title: string;
   description?: string;
   project: DocumentedProject;
+  isIndex?: boolean;
 }
 
-const { title, description, project } = Astro.props;
+const { title, description, project, isIndex = false } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/$/, "");
 const pageTitle = `${title} - ${project.name} - BEAM Community`;
 ---
@@ -96,9 +97,12 @@ const pageTitle = `${title} - ${project.name} - BEAM Community`;
       </div>
 
       <main class="min-w-0 flex-1">
-        <div class="mb-6">
-          <HexDocsLink url={project.hexdocsUrl} name={project.name} />
-        </div>
+        <DocsBreadcrumb
+          projectName={project.name}
+          projectSlug={project.slug}
+          currentTitle={title}
+          isIndex={isIndex}
+        />
 
         <DocsContent>
           <slot />
