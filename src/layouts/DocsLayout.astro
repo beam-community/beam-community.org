@@ -3,6 +3,7 @@ import Layout from "./Layout.astro";
 import DocsSidebar from "../components/DocsSidebar.astro";
 import DocsContent from "../components/DocsContent.astro";
 import DocsBreadcrumb from "../components/DocsBreadcrumb.astro";
+import DocsNavigation from "../components/DocsNavigation.astro";
 import { Icon } from "astro-icon/components";
 import { NAV_LINKS, GITHUB_ORG_URL } from "../lib/constants";
 import type { DocumentedProject } from "../lib/types";
@@ -107,6 +108,8 @@ const pageTitle = `${title} - ${project.name} - BEAM Community`;
         <DocsContent>
           <slot />
         </DocsContent>
+
+        <DocsNavigation project={project} currentPath={currentPath} />
       </main>
     </div>
   </div>
