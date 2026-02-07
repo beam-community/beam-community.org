@@ -12,11 +12,17 @@
         "hidden": false
       },
       {
+        "type": "docs",
+        "section": "Documentation",
+        "hidden": false
+      },
+      {
         "type": "chore",
         "section": "Miscellaneous",
         "hidden": false
       }
     ],
+    "versioning": "always-bump-patch",
     "draft": false,
     "draft-pull-request": false,
     "packages": {
