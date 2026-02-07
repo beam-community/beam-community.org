@@ -12,6 +12,7 @@
 		"lint:strict": "eslint --max-warnings=0 . --ext .js,.ts,.astro"
 	},
 	"dependencies": {
+		"@astrojs/mdx": "^4.3.13",
 		"@fontsource/inter": "^5.1.1",
 		"astro": "^5.3.0",
 		"astro-icon": "^1.1.5"
