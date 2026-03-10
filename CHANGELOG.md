@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/beam-community/beam-community.org/compare/v1.1.0...v1.1.1) (2026-03-10)
+
+
+### Bug Fixes
+
+* improve mobile navigation menu visibility ([#49](https://github.com/beam-community/beam-community.org/issues/49)) ([affa26e](https://github.com/beam-community/beam-community.org/commit/affa26ed76ada3e7e327a09adf9e61c523ad7598)), closes [#44](https://github.com/beam-community/beam-community.org/issues/44)
+
 ## [1.1.0](https://github.com/beam-community/beam-community.org/compare/v1.0.1...v1.1.0) (2026-02-07)
 
 
