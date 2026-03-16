@@ -1,5 +1,7 @@
 ---
 import type { OrgStats } from "../lib/types";
+import { GITHUB_SPONSORS_URL } from "../lib/constants";
+import { Icon } from "astro-icon/components";
 import StatItem from "./StatItem.astro";
 
 interface Props {
@@ -45,6 +47,15 @@ const { stats } = Astro.props;
           class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 rounded-lg border-2 border-white/30 text-white font-semibold hover:bg-white/10 transition-colors"
         >
           Get Involved
+        </a>
+        <a
+          href={GITHUB_SPONSORS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg border-2 border-pink-400/50 text-pink-200 font-semibold hover:bg-pink-500/20 hover:border-pink-400 transition-colors"
+        >
+          <Icon name="lucide:heart" class="w-5 h-5" />
+          Sponsor Us
         </a>
       </div>
     </div>

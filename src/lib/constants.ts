@@ -5,9 +5,11 @@ export const NAV_LINKS = [
   { href: "#projects", label: "Projects" },
   { href: "/projects", label: "Docs" },
   { href: "#get-involved", label: "Get Involved" },
+  { href: "#sponsor", label: "Sponsor" },
 ];
 
 export const GITHUB_ORG_URL = "https://github.com/beam-community";
+export const GITHUB_SPONSORS_URL = "https://github.com/sponsors/beam-community";
 
 export const ABOUT_FEATURES = [
   {
@@ -66,6 +68,7 @@ export const INVOLVEMENT_CARDS = [
 
 export const FOOTER_LINKS = [
   { label: "GitHub", url: "https://github.com/beam-community", icon: "simple-icons:github" },
+  { label: "Sponsor", url: "https://github.com/sponsors/beam-community", icon: "lucide:heart" },
   { label: "Hex.pm", url: "https://hex.pm/orgs/beam_community", icon: "simple-icons:elixir" },
   { label: "Elixir Forum", url: "https://elixirforum.com", icon: "lucide:message-circle" },
   { label: "Erlang Ecosystem Foundation", url: "https://erlef.org", icon: "lucide:globe" },

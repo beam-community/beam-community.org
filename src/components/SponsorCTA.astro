@@ -1,0 +1,83 @@
+---
+import { Icon } from "astro-icon/components";
+import { GITHUB_SPONSORS_URL } from "../lib/constants";
+import SectionHeading from "./SectionHeading.astro";
+
+const SPONSOR_REASONS = [
+  {
+    icon: "lucide:wrench",
+    title: "Keep Libraries Maintained",
+    description:
+      "Your sponsorship funds the ongoing maintenance of 14+ packages that millions of developers rely on daily.",
+  },
+  {
+    icon: "lucide:shield-check",
+    title: "Security & Stability",
+    description:
+      "Help us respond quickly to security issues, keep dependencies current, and ensure packages work with the latest OTP and Elixir releases.",
+  },
+  {
+    icon: "lucide:rocket",
+    title: "Grow the Ecosystem",
+    description:
+      "Fund new features, better documentation, and the adoption of more community packages that need a home.",
+  },
+];
+---
+
+<section id="sponsor" class="py-20 sm:py-24 bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading
+      title="Sponsor BEAM Community"
+      subtitle="128M+ downloads. 14 projects. A small team keeping it all running. Your support makes a real difference."
+    />
+
+    <div class="grid sm:grid-cols-3 gap-8 mb-12">
+      {
+        SPONSOR_REASONS.map((reason) => (
+          <div class="text-center p-6 rounded-xl">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-pink-100 dark:bg-pink-950/50 mb-4">
+              <Icon name={reason.icon} class="w-6 h-6 text-pink-600 dark:text-pink-400" />
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">{reason.title}</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400">{reason.description}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- CTA card -->
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-700 via-purple-600 to-pink-600 p-8 sm:p-12 text-center">
+      <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="sponsor-hex" width="56" height="100" patternUnits="userSpaceOnUse" patternTransform="scale(1.5)">
+              <path d="M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100" fill="none" stroke="white" stroke-width="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#sponsor-hex)" />
+        </svg>
+      </div>
+      <div class="relative">
+        <Icon name="lucide:heart" class="w-10 h-10 text-pink-300 mx-auto mb-4" />
+        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-3">
+          Help us sustain the BEAM ecosystem
+        </h3>
+        <p class="text-purple-200 max-w-2xl mx-auto mb-8 text-lg">
+          Whether you're an individual developer or a company building on Elixir and Erlang,
+          your sponsorship directly funds package maintenance, security updates, and community growth.
+          Tiers start at just $5/month.
+        </p>
+        <a
+          href={GITHUB_SPONSORS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-white text-purple-700 font-semibold hover:bg-purple-50 transition-colors shadow-lg"
+        >
+          <Icon name="lucide:heart" class="w-5 h-5 text-pink-500" />
+          Become a Sponsor on GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
