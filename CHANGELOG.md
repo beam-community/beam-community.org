@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/beam-community/beam-community.org/compare/v1.1.0...v1.2.0) (2026-03-16)
+
+
+### Features
+
+* add GitHub Sponsors CTA across the site ([#51](https://github.com/beam-community/beam-community.org/issues/51)) ([d08370a](https://github.com/beam-community/beam-community.org/commit/d08370aa9bfb848c89a052ac7c235c8fd41a51be))
+
+
+### Bug Fixes
+
+* improve mobile navigation menu visibility ([#49](https://github.com/beam-community/beam-community.org/issues/49)) ([affa26e](https://github.com/beam-community/beam-community.org/commit/affa26ed76ada3e7e327a09adf9e61c523ad7598)), closes [#44](https://github.com/beam-community/beam-community.org/issues/44)
+
 ## [1.1.0](https://github.com/beam-community/beam-community.org/compare/v1.0.1...v1.1.0) (2026-02-07)
 
 
