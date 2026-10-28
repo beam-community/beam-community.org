@@ -1,11 +1,11 @@
 import type { Project, OrgStats, DocumentedProject } from "./types";
 
 export const NAV_LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
+  { href: "/#about", label: "About" },
+  { href: "/#projects", label: "Projects" },
   { href: "/projects", label: "Docs" },
-  { href: "#get-involved", label: "Get Involved" },
-  { href: "#sponsor", label: "Sponsor" },
+  { href: "/#get-involved", label: "Get Involved" },
+  { href: "/#sponsor", label: "Sponsor" },
 ];
 
 export const GITHUB_ORG_URL = "https://github.com/beam-community";
